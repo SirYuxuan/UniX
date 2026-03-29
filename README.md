@@ -31,7 +31,7 @@ UniX: Unifying Autoregression and Diffusion for <br> Chest X-Ray Understanding a
   <sup>*</sup>equal contribution &emsp; ✉️ corresponding author
 </p>
 <p align="center">
-  <a href="https://arxiv.org/abs/2601.11522"><img src="https://img.shields.io/badge/arXiv-UniX-b31b1b?logo=arxiv&logoColor=white" alt="arXiv"></a>&nbsp;<a href="https://huggingface.co/ZrH42/UniX"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Weights-blue" alt="Hugging Face"></a>&nbsp;<a href="https://www.modelscope.cn/models/ZrH4321/UniX"><img src="https://img.shields.io/badge/ModelScope-Weights-624AFF?logo=modelscope&logoColor=white" alt="ModelScope">
+  <a href="#"><img src="https://img.shields.io/badge/arXiv-UniX-b31b1b?logo=arxiv&logoColor=white" alt="arXiv"></a>&nbsp;<a href="https://huggingface.co/ZrH42/UniX"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Weights-blue" alt="Hugging Face"></a>&nbsp;<a href="https://www.modelscope.cn/models/ZrH4321/UniX"><img src="https://img.shields.io/badge/ModelScope-Weights-624AFF?logo=modelscope&logoColor=white" alt="ModelScope">
 </a>
 </p>
 </div>
@@ -98,7 +98,8 @@ Unified medical modeling has emerged as a promising direction for generalist cli
 | Document | Description |
 | :--- | :--- |
 | [Installation](docs/INSTALLATION.md) | Environment setup and model preparation |
-| [Inference & Evaluation](docs/INFERENCE_EVALUATION.md)                       | Quick inference with pre-trained weights and evaluate |
+| [Inference & Evaluation](docs/INFERENCE_EVALUATION.md) | Quick inference with pre-trained weights and evaluate |
+| [Training](docs/TRAINING.md) | Training scripts for understanding and generation tasks |
 
 
 ## ❤️ Acknowledgements
@@ -111,8 +112,7 @@ If you find our work useful, please cite our paper:
 @article{zhang2026unix,
   title={UniX: Unifying Autoregression and Diffusion for Chest X-Ray Understanding and Generation},
   author={Zhang, Ruiheng and Yao, Jingfeng and Zhao, Huangxuan and Yan, Hao and He, Xiao and Chen, Lei and Wei, Zhou and Luo, Yong and Wang, Zengmao and Zhang, Lefei and Tao, Dacheng and Du, Bo},
-  journal={arXiv preprint arXiv:2601.11522},
+  journal={arXiv preprint arXiv:2601.xxxxx},
   year={2026}
 }
 ```
-

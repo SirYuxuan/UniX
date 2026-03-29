@@ -12,23 +12,23 @@ DATASET_REGISTRY = {
 DATASET_INFO = {
     't2i_pretrain': {
         't2i': {
-            'data_dir': '/data/zhangruiheng/Unix_dataset/t2i', # path of the parquet files
+            'data_dir': 'bagel_example/t2i', # path of the parquet files
             'num_files': 10, # number of data units to be sharded across all ranks and workers
-            'num_total_samples': 237387, # number of total samples in the dataset
+            'num_total_samples': 1000, # number of total samples in the dataset
         },
     },
     't2i_finetune': {
         't2i': {
-            'data_dir': '/data/zhangruiheng/Unix_dataset/t2i_512', # path of the parquet files
-            'num_files': 40, # number of data units to be sharded across all ranks and workers
-            'num_total_samples': 237387, # number of total samples in the dataset
+            'data_dir': 'bagel_example/t2i', # path of the parquet files
+            'num_files': 10, # number of data units to be sharded across all ranks and workers
+            'num_total_samples': 1000, # number of total samples in the dataset
         },
     },
     'vlm_sft': {
         'llava_ov': {
-			'data_dir': '/data/zhangruiheng/Unix_dataset/vlm/images_mimic',
-			'jsonl_path': '/data/zhangruiheng/Unix_dataset/vlm/mimic_mmu_si.jsonl',
-			'num_total_samples': 163344
+			'data_dir': 'bagel_example/vlm/images',
+			'jsonl_path': 'bagel_example/vlm/llava_ov_si.jsonl',
+			'num_total_samples': 1000
 		},
     },
 }

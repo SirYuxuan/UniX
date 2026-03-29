@@ -27,13 +27,14 @@ class MaxLongEdgeMinShortEdgeResize(torch.nn.Module):
     """
 
     def __init__(
-        self, 
-        max_size: int, 
-        min_size: int, 
-        stride: int, 
+        self,
+        max_size: int,
+        min_size: int,
+        stride: int,
         max_pixels: int,
-        interpolation=InterpolationMode.BICUBIC, 
-        antialias=True
+        interpolation=InterpolationMode.BICUBIC,
+        antialias=True,
+        pad_to_square: int = None
     ):
         super().__init__()
         self.max_size = max_size
@@ -42,6 +43,7 @@ class MaxLongEdgeMinShortEdgeResize(torch.nn.Module):
         self.max_pixels = max_pixels
         self.interpolation = interpolation
         self.antialias = antialias
+        self.pad_to_square = pad_to_square
 
     def _make_divisible(self, value, stride):
         """Ensure the value is divisible by the stride."""
@@ -81,7 +83,16 @@ class MaxLongEdgeMinShortEdgeResize(torch.nn.Module):
             scale = self.max_size / max(new_width, new_height)
             new_width, new_height = self._apply_scale(new_width, new_height, scale)
 
-        return F.resize(img, (new_height, new_width), self.interpolation, antialias=self.antialias)
+        img = F.resize(img, (new_height, new_width), self.interpolation, antialias=self.antialias)
+
+        # Pad to uniform size with black (zero) padding
+        if self.pad_to_square is not None:
+            pad_w = self.pad_to_square - new_width
+            pad_h = self.pad_to_square - new_height
+            # F.pad: (left, top, right, bottom)
+            img = F.pad(img, (0, 0, pad_w, pad_h), fill=0)
+
+        return img
 
 
 class BaseImageTransform:
@@ -95,6 +106,7 @@ class BaseImageTransform:
         image_mean: list,
         image_std: list,
         max_pixels: int = 14 * 14 * 9 * 1024,
+        pad_to_square: int = None,
     ):
         self.stride = image_stride
         self.resize_transform = MaxLongEdgeMinShortEdgeResize(
@@ -102,6 +114,7 @@ class BaseImageTransform:
             min_size=min_image_size,
             stride=image_stride,
             max_pixels=max_pixels,
+            pad_to_square=pad_to_square,
         )
         self.to_tensor_transform = transforms.ToTensor()
         self.normalize_transform = transforms.Normalize(
@@ -126,7 +139,8 @@ class SigLIPImageTransform(BaseImageTransform):
         max_image_size: int,
         min_image_size: int,
         image_stride: int,
-        max_pixels: int = 14 * 14 * 9 * 1024
+        max_pixels: int = 14 * 14 * 9 * 1024,
+        pad_to_square: int = None,
     ):
         super().__init__(
             max_image_size=max_image_size,
@@ -134,7 +148,8 @@ class SigLIPImageTransform(BaseImageTransform):
             image_stride=image_stride,
             max_pixels=max_pixels,
             image_mean=[0.555895, 0.555895, 0.555895],
-            image_std=[0.336385, 0.336385, 0.336385]
+            image_std=[0.336385, 0.336385, 0.336385],
+            pad_to_square=pad_to_square,
         )
 
 
@@ -146,7 +161,8 @@ class VAEImageTransform(BaseImageTransform):
         max_image_size: int,
         min_image_size: int,
         image_stride: int,
-        max_pixels: int = 14 * 14 * 9 * 1024
+        max_pixels: int = 14 * 14 * 9 * 1024,
+        pad_to_square: int = None,
     ):
         super().__init__(
             max_image_size=max_image_size,
@@ -154,7 +170,8 @@ class VAEImageTransform(BaseImageTransform):
             image_stride=image_stride,
             max_pixels=max_pixels,
             image_mean=[0.5, 0.5, 0.5],
-            image_std=[0.5, 0.5, 0.5]
+            image_std=[0.5, 0.5, 0.5],
+            pad_to_square=pad_to_square,
         )
 
 

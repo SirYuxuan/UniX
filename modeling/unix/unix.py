@@ -455,7 +455,7 @@ class UniX(PreTrainedModel):
             attention_mask = nested_attention_masks
 
         if self.config.visual_und:
-            # Directly process original images, no complex packed format needed
+            # All images are already resized and padded to uniform size in dataset
             batch_images = torch.stack(packed_vit_images, dim=0)  # [batch_size, C, H, W]
             vit_output = self.vit_model(batch_images)  # Pass images directly
             

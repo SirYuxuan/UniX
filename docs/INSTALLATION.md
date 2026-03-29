@@ -21,6 +21,7 @@ bash install.sh
 | VLM (Janus-Pro-1B) | [HuggingFace](https://huggingface.co/deepseek-ai/Janus-Pro-1B) |
 | ViT (SigLIP) | [HuggingFace](https://huggingface.co/google/siglip-large-patch16-384) |
 | VAE and VAE config | [Offline ](https://ommer-lab.com/files/latent-diffusion/kl-f16.zip)and [Github](https://github.com/CompVis/latent-diffusion/tree/main/models/first_stage_models/kl-f16) |
+| RadDino (optional) | [HuggingFace](https://huggingface.co/microsoft/rad-dino) |
 | CheXbert (optional) | [GitHub](https://github.com/stanfordmlgroup/CheXbert) |
 
 ### Directory Structure
@@ -35,5 +36,6 @@ weights/
 ├── vae/f16d16/
 │         ├── kl-f16d16.ckpt
 │         └── kl-f16d16.yaml
+├── RadDino (optional)
 └── chexbert/chexbert.pth (optional)
 ```

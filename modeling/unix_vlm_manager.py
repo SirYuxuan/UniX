@@ -180,6 +180,12 @@ class UnixVLMComponentManager:
     
     def load_language_model(self, llm_config, training_args):
         """Load and initialize language model with UniX VLM weights"""
+        # Pass REPA config to language model
+        llm_config.use_repa = training_args.use_repa
+        llm_config.repa_enc_type = training_args.repa_enc_type
+        llm_config.repa_projector_dim = training_args.repa_projector_dim
+        llm_config.repa_encoder_depth = training_args.repa_encoder_depth
+
         self.language_model = Qwen2ForCausalLM(llm_config)
         self.language_model = self.language_model.to(dtype=torch.bfloat16)
         
